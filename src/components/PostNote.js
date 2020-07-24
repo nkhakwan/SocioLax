@@ -14,7 +14,7 @@ export default function PostNote(props) {
   const like = (id, userId) => {
     if (!posting.usersLiked.includes(userId)) {
       console.log(id);
-      return firestore.update({ collection: 'postings', doc: posting.id }, { likes: posting.likes + 1, usersLiked: [...posting.usersLiked, userId] })
+      return firestore.update({ collection: 'postings', doc: id }, { likes: posting.likes + 1, usersLiked: [...posting.usersLiked, userId] })
     } else {
       console.log("already liked");
 
@@ -25,7 +25,7 @@ export default function PostNote(props) {
   return (
     <div key={posting.id} className='pc'>
       <h2>{posting.name}</h2>
-      <h3>By {project.userEmail}</h3>
+      <h3>By {posting.userEmail}</h3>
       <p>{posting.desc}</p>
       <h4>Likes: {posting.likes}</h4>
       {user != null ? <button onClick={() => like(posting.id, user.uid)}>Like</button> : ''}
