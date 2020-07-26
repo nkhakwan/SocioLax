@@ -22,17 +22,12 @@ export default function SignIn() {
   const [signinEmail, setSigninEmail] = useState("")
   const [signinPassword, setSigninPassword] = useState("")
   const [role, setrole] = useState("Role1")
-  
+
   //////////////////////////////
   /////////////////////////////
-  const [toggleToSignIn, setToggleToSignIn] = useState(false);
-
-  ///////////////////////
-  ///////////////////////
 
   const firestore = useFirestore()
   const auth = firebase.auth()
-  console.log(`${isLoaded(auth)} and ${auth.currentUser}`);
 
 //////////////////////
 //////////////////////
@@ -45,7 +40,6 @@ export default function SignIn() {
 
         message.success("successfully signed up!");
         setSignupVisible(false)
-        setToggleToSignIn(true);
         return firestore.collection('users').add({ userId: data.user.uid, role, liked: [] })
       }).catch(function (error) {
         message.error(error.message);
@@ -63,7 +57,6 @@ export default function SignIn() {
     firebase.auth().signInWithEmailAndPassword(signinEmail, signinPassword).then(function () {
       message.success("Successfully signed in!");
       setSigninVisible(false)
-      setToggleToSignIn(true);
       console.log(auth.currentUser)
     }).catch(function (error) {
       message.error(error.message);
@@ -77,7 +70,6 @@ export default function SignIn() {
     console.log("i am in signout");
     firebase.auth().signOut().then(function () {
       message.success("Successfully signed out!");
-      setToggleToSignIn(false);
 
     }).catch(function (error) {
       message.error(error.message);
@@ -89,8 +81,7 @@ export default function SignIn() {
 
 
 
-  if ((isLoaded(auth)) && (auth.currentUser == null) && (!toggleToSignIn)) {
-    console.log(`${isLoaded(auth)} and ${auth.currentUser}`);
+  if ((isLoaded(auth)) && (auth.currentUser == null)) {
     return (
       <nav className="header">
         <Link to="/">See All Posts</Link>
@@ -122,7 +113,7 @@ export default function SignIn() {
   } else {
     return (
       <nav className="header">
-        {/* <Link to="/">See all Posts</Link> */}
+        <Link to="/">See all Posts</Link>
         <Link to="/SocioLax">Show My Posts only</Link>
         <Button onClick={doSignOut}>Sign out</Button>
         {/* <Button onClick={doSignIn}>Sign In</Button> */}

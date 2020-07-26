@@ -23,7 +23,8 @@ export default function PostNote(props) {
   }
 
   return (
-    <div key={posting.id} className='pc'>
+    //<div key={posting.userId} className='pc'>
+    <div  className='pc'>
       <h2>{posting.name}</h2>
       <h3>By {posting.userEmail}</h3>
       <p>{posting.desc}</p>
