@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import firebase from "firebase/app";
 import { message, Button, Modal } from 'antd';
 import { isLoaded } from 'react-redux-firebase'
 import { Link } from "react-router-dom";
-import { useFirestore } from 'react-redux-firebase'
-
+import { useFirestore } from 'react-redux-firebase';
+import { UserContext } from './userContext';
 
 ///////////////////
 ///////////////////
@@ -22,10 +22,11 @@ export default function SignIn() {
   const [signinEmail, setSigninEmail] = useState("")
   const [signinPassword, setSigninPassword] = useState("")
   const [role, setrole] = useState("Role1")
-  
+  const { value, setValue } = useContext(UserContext);
+
   //////////////////////////////
   /////////////////////////////
-  const [toggleToSignIn, setToggleToSignIn] = useState(false);
+  //const [toggleToSignIn, setToggleToSignIn] = useState(false);
 
   ///////////////////////
   ///////////////////////
@@ -34,8 +35,8 @@ export default function SignIn() {
   const auth = firebase.auth()
   console.log(`${isLoaded(auth)} and ${auth.currentUser}`);
 
-//////////////////////
-//////////////////////
+  //////////////////////
+  //////////////////////
 
   function doSignUp() {
     console.log("i am in signup");
@@ -44,8 +45,9 @@ export default function SignIn() {
         console.log("do i get anything here=>>> ", data.user.uid)
 
         message.success("successfully signed up!");
+        setValue(auth.currentUser);
         setSignupVisible(false)
-        setToggleToSignIn(true);
+        //setToggleToSignIn(true);
         return firestore.collection('users').add({ userId: data.user.uid, role, liked: [] })
       }).catch(function (error) {
         message.error(error.message);
@@ -55,15 +57,16 @@ export default function SignIn() {
     }
   }
 
-////////////////////
-////////////////////
+  ////////////////////
+  ////////////////////
 
   function doSignIn() {
-    console.log ("i am in simple signin");
+    console.log("i am in simple signin");
     firebase.auth().signInWithEmailAndPassword(signinEmail, signinPassword).then(function () {
       message.success("Successfully signed in!");
       setSigninVisible(false)
-      setToggleToSignIn(true);
+      //setToggleToSignIn(true);
+      setValue(auth.currentUser);
       console.log(auth.currentUser)
     }).catch(function (error) {
       message.error(error.message);
@@ -77,8 +80,8 @@ export default function SignIn() {
     console.log("i am in signout");
     firebase.auth().signOut().then(function () {
       message.success("Successfully signed out!");
-      setToggleToSignIn(false);
-
+      //setToggleToSignIn(false);
+      setValue(null);
     }).catch(function (error) {
       message.error(error.message);
     });
@@ -89,11 +92,11 @@ export default function SignIn() {
 
 
 
-  if ((isLoaded(auth)) && (auth.currentUser == null) && (!toggleToSignIn)) {
+  if ((value == null) && (auth.currentUser == null)) {
     console.log(`${isLoaded(auth)} and ${auth.currentUser}`);
     return (
       <nav className="header">
-        <Link to="/">See All Posts</Link>
+        {/* <Link to="/">See All Posts</Link> */}
         <Button type="primary" onClick={() => setSignupVisible(true)}> Sign Up</Button>
         <Modal title="Sign up" visible={signupVisible} onOk={doSignUp} onCancel={() => setSignupVisible(false)}>
           <h1>Sign up</h1>
@@ -108,7 +111,7 @@ export default function SignIn() {
 
           </form>
         </Modal>
-
+        <h3> Please SignIn if you want to Post your comments</h3>
         <Button type="primary" onClick={() => setSigninVisible(true)}> Sign In</Button>
         <Modal title="Sign in" visible={signinVisible} onOk={doSignIn} onCancel={() => setSigninVisible(false)}>
           <h1>Sign In</h1>
@@ -122,12 +125,14 @@ export default function SignIn() {
   } else {
     return (
       <nav className="header">
-        {/* <Link to="/">See all Posts</Link> */}
-        <Link to="/SocioLax">Show My Posts only</Link>
+        <Link to="/SocioLax">HOME</Link>
         <Button onClick={doSignOut}>Sign out</Button>
-        {/* <Button onClick={doSignIn}>Sign In</Button> */}
-        {/* <Button onClick={doSignUp}>Sign up</Button> */}
       </nav>
     )
   }
 }
+
+
+
+
+

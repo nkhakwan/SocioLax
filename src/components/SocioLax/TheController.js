@@ -1,14 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { isLoaded } from 'react-redux-firebase';
 import firebase from 'firebase/app'
 import PostsList from './PostsList'
 import NewPostForm from './NewPostForm';
+import { message, Button, Modal } from 'antd';
+import { Link } from "react-router-dom";
+import { useFirestore } from 'react-redux-firebase'
+import { UserContext } from '../userContext'
+
 
 export default function TheController() {
-  const [form, setform] = useState(true);
+  const [form, setform] = useState(false);
+  const { value, setValue } = useContext(UserContext);
 
 
+  const firestore = useFirestore()
   const auth = firebase.auth();
+
+
+
   if (!isLoaded(auth)) {
     return (
       <React.Fragment>
@@ -16,8 +26,7 @@ export default function TheController() {
       </React.Fragment>
     )
   }
-  if ((isLoaded(auth)) && (auth.currentUser == null)) {
-    console.log(auth.currentUser);
+  if ((value == null)) {
     console.log(isLoaded(auth));
 
     return (
@@ -26,12 +35,12 @@ export default function TheController() {
       </React.Fragment>
     )
   }
-  if ((isLoaded(auth)) && (auth.currentUser != null)) {
-    console.log(auth.currentUser)
+  if ((value)) {
     return (
       <div>
         <h1>Your Posts</h1>
-        {!form ? <PostsList currentUser={auth.currentUser} /> : <NewPostForm auth={auth} setform={setform} />}
+        {/* {!form ? <PostsList currentUser={auth.currentUser} /> : <NewPostForm auth={auth} setform={setform} />} */}
+        {<NewPostForm auth={auth} setform={setform} />}
         <button onClick={() => setform(true)}>Add Post</button>
       </div >
     )

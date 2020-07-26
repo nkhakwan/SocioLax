@@ -1,24 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../App.css';
 import 'antd/dist/antd.css';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Landing from './home/Landing'
 import SignIn from "./SignIn"
 import TheController from './SocioLax/TheController';
+import { UserContext } from './userContext';
 
 
 function App() {
+  const [value, setValue] = useState(null);
+  //const [list, setList] = useState([]);
+
   return (
     <Router>
-      <SignIn />
-      <Switch>
-        <Route path="/SocioLax">
-          <TheController />
-        </Route>
-        <Route path="/">
-          <Landing />
-        </Route>
-      </Switch>
+      <UserContext.Provider value={{ value, setValue }}>
+        <SignIn />
+        <Switch>
+          <Route path="/SocioLax">
+            <TheController />
+          </Route>
+          <Route path="/">
+            <Landing />
+          </Route>
+        </Switch>
+      </UserContext.Provider>
     </Router>
   );
 }

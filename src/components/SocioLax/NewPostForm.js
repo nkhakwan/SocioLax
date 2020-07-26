@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { message } from "antd"
-
 import { useFirestore } from 'react-redux-firebase'
 
 export default function NewPostForm(props) {

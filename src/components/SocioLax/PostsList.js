@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import PostNote from "../PostNote"
+import PostNote from "./PostNote"
 import { useFirestore } from 'react-redux-firebase'
 
 export default function PostsList(props) {
