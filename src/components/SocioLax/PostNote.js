@@ -11,6 +11,9 @@ export default function PostNote(props) {
     setUser(auth.currentUser)
   }, [auth])
 
+  ////
+  ////
+  ////
   const like = (id, userId) => {
     if (!posting.usersLiked.includes(userId)) {
       console.log(id);
@@ -21,6 +24,26 @@ export default function PostNote(props) {
     }
     console.log("proj id =>", id, "user id =>", userId)
   }
+  /////
+  /////
+  /////
+
+
+  const deletePost = (id, userId) => {
+    if (posting.userId == userId) {
+      console.log(id);
+      return firestore.delete({ collection: 'postings', doc: id })
+    } else {
+      console.log("either you are not the owner of this doc or the doc didn't exist");
+
+    }
+    console.log("proj id =>", id, "user id =>", userId)
+  }
+
+  //////
+  /////
+  /////
+
 
   return (
     //<div key={posting.userId} className='pc'>
@@ -30,6 +53,8 @@ export default function PostNote(props) {
       <p>{posting.desc}</p>
       <h4>Likes: {posting.likes}</h4>
       {user != null ? <button onClick={() => like(posting.id, user.uid)}>Like</button> : ''}
+      {user != null ? <button onClick={() => deletePost(posting.id, user.uid)}>Delete the Post</button> : ''}
+
       <a href={posting.url}>See it</a>
     </div>
   )

@@ -76,6 +76,7 @@ export default function SignIn() {
       setValue(auth.currentUser);
       console.log(value);
       console.log(auth.currentUser)
+      console.log(auth)
     }).catch(function (error) {
       message.error(error.message);
     });

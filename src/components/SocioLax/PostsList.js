@@ -40,7 +40,13 @@ export default function PostsList(props) {
   }, [])
 
 
-
+  if (!isLoaded(auth)) {
+    return (
+      <React.Fragment>
+        <h1>Loading...</h1>
+      </React.Fragment>
+    )
+  } else{
   return (
     <div className="card-container">
       {data.length === 0 ? <h1>Nothing yet add some!</h1> : data.map(post => <PostNote key={post.id} posting={post} />)}
@@ -48,5 +54,5 @@ export default function PostsList(props) {
     </div>
   )
 
-
+  }
 }

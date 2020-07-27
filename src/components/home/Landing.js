@@ -15,16 +15,12 @@ export default function Landing() {
   useFirestoreConnect([{ collection: 'postings' }])
   const postings = useSelector(state => state.firestore.ordered.postings)
   if (isLoaded(postings)) {
-    console.log(postings)
+    console.log(postings);
+    //postings.map(posting=> (console.log(posting.id)));
     return (
       <>
-        
           <h1>All Postings</h1>
-         
-          {/* <h1>click "HOME" to add a Post or Click "YOURPOSTS to see all of your posts</h1> */}
-        
         <div className="card-container">
-
           {postings.length === 0 ? <h1>Nothing yet, post what's on your mind!</h1> : postings.map(posting => (<PostNote key={posting.id} posting={posting} />))}
         </div>
       </>
