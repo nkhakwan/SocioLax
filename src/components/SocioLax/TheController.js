@@ -6,16 +6,33 @@ import NewPostForm from './NewPostForm';
 import { message, Button, Modal } from 'antd';
 import { Link } from "react-router-dom";
 import { useFirestore } from 'react-redux-firebase'
-import { UserContext } from '../userContext'
+import { UserContext, AddPostContext } from '../userContext'
 
 
 export default function TheController() {
-  const [form, setform] = useState(false);
-  const { value, setValue } = useContext(UserContext);
 
+  //======================
+  //======================
+  const [form, setform] = useState(false);
+  //const [myPosts, setMyPosts] = useState(false);
+  // [seeAllPosts, setSeeAllPosts] = useState(false);
+  //======================
+  //======================  
+  const { value, setValue } = useContext(UserContext);
+ // const { addPost, setAddPost } = useContext(AddPostContext);
+  //==========================
+  //==========================
 
   const firestore = useFirestore()
   const auth = firebase.auth();
+
+  //============================
+  //============================
+
+  // useEffect(() => {
+  //   console.log(addPost)
+  // }, [addPost]
+  // )
 
 
 
@@ -26,6 +43,9 @@ export default function TheController() {
       </React.Fragment>
     )
   }
+
+  // ==================
+  // ==================
   if ((value == null)) {
     console.log(isLoaded(auth));
 
@@ -35,14 +55,67 @@ export default function TheController() {
       </React.Fragment>
     )
   }
+
+  //===================
+  //===================
+  let currentlyVisibleState = null;
   if ((value)) {
+    console.log(value);
+    //console.log(addPost);
+   // if (addPost) {
+      currentlyVisibleState = <NewPostForm auth={auth} />
+    }
+    // } else if (MyPosts) {
+    // currentlyVisibleState = <NewKeg onNewKegCreation={this.onNewKegCreation} />
+    // } else if (seeAllPosts) {
+    // currentlyVisibleState = <KegList kegList={this.state.masterKegList} buy={this.buy} detail={this.detail} />;
+    // }
     return (
-      <div>
-        <h1>Your Posts</h1>
-        {/* {!form ? <PostsList currentUser={auth.currentUser} /> : <NewPostForm auth={auth} setform={setform} />} */}
-        {<NewPostForm auth={auth} setform={setform} />}
-        <button onClick={() => setform(true)}>Add Post</button>
-      </div >
-    )
+      <React.Fragment>
+        {currentlyVisibleState}
+      </React.Fragment>
+    );
+    //}
+    // Final One
   }
-}
+
+
+
+  /// All garbage below.
+
+//     return (
+//       <div>
+//         <h1>Your Posts</h1>
+//         {/* {!form ? <PostsList currentUser={auth.currentUser} /> : <NewPostForm auth={auth} setform={setform} />} */}
+//         {<NewPostForm auth={auth} setform={setform} />}
+
+//       </div >
+//     )
+//   }
+
+//   // final One;
+// }
+
+
+
+// render() {
+
+//   <button onClick={() => setAddPost(true)}>Add a Post</button>
+//   <button onClick={() => setMyPosts(true)}>See my Posts only</button>
+//   <button onClick={() => setSeeAllPosts(true)}>See all Posts</button>
+
+//   let currentlyVisibleState = null;
+//   let buttonText = null;
+//   if (AddPost){
+//     currentlyVisibleState = <Details detailItem={this.state.detailItem[0]} back={this.back } />;
+//   } else if (MyPosts) {
+//     currentlyVisibleState = <NewKeg onNewKegCreation={this.onNewKegCreation} />
+//   } else if (seeAllPosts) {
+//     currentlyVisibleState = <KegList kegList={this.state.masterKegList} buy={this.buy} detail={this.detail} />;
+//   }
+//   return (
+//     <React.Fragment>
+//       {currentlyVisibleState}
+//     </React.Fragment>
+//   );
+// }

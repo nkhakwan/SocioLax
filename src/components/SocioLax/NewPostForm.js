@@ -3,7 +3,7 @@ import { message } from "antd"
 import { useFirestore } from 'react-redux-firebase'
 
 export default function NewPostForm(props) {
-  const { setform, auth } = props
+  const { addPost, auth } = props
 
   const firestore = useFirestore();
   const [name, setname] = useState('');
@@ -11,7 +11,7 @@ export default function NewPostForm(props) {
   const [desc, setdesc] = useState('');
 
   const addProject = () => {
-    setform(false)
+    addPost(false)
     message.success("Post Added Succesfully!")
     return firestore.collection('postings').add({ name, url, desc, userId: auth.currentUser.uid, userEmail: auth.currentUser.email, likes: 0, usersLiked: [] })
   }

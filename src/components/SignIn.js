@@ -4,7 +4,7 @@ import { message, Button, Modal } from 'antd';
 import { isLoaded } from 'react-redux-firebase'
 import { Link } from "react-router-dom";
 import { useFirestore } from 'react-redux-firebase';
-import { UserContext } from './userContext';
+import { UserContext, AddPostContext } from './userContext';
 
 ///////////////////
 ///////////////////
@@ -22,7 +22,12 @@ export default function SignIn() {
   const [signinEmail, setSigninEmail] = useState("")
   const [signinPassword, setSigninPassword] = useState("")
   const [role, setrole] = useState("Role1")
+  const [toggleToSignIn, setToggleToSignIn] = useState(false);
+
+  //======================
   const { value, setValue } = useContext(UserContext);
+  //const { addPost, setAddPost } = useContext(AddPostContext);
+  // ==============================
 
   //////////////////////////////
   /////////////////////////////
@@ -47,6 +52,7 @@ export default function SignIn() {
         message.success("successfully signed up!");
         setValue(auth.currentUser);
         setSignupVisible(false)
+        setToggleToSignIn(true);
         //setToggleToSignIn(true);
         return firestore.collection('users').add({ userId: data.user.uid, role, liked: [] })
       }).catch(function (error) {
@@ -65,13 +71,23 @@ export default function SignIn() {
     firebase.auth().signInWithEmailAndPassword(signinEmail, signinPassword).then(function () {
       message.success("Successfully signed in!");
       setSigninVisible(false)
-      //setToggleToSignIn(true);
+      setToggleToSignIn(true);
       setValue(auth.currentUser);
+      console.log(value);
       console.log(auth.currentUser)
     }).catch(function (error) {
       message.error(error.message);
     });
   }
+
+  // function doAddPost() {
+  //   console.log(addPost)
+  //   setAddPost(true);
+  //   console.log(addPost)
+  // }
+
+
+
 
   ////////////////////
   ///////////////////
@@ -80,8 +96,9 @@ export default function SignIn() {
     console.log("i am in signout");
     firebase.auth().signOut().then(function () {
       message.success("Successfully signed out!");
-      //setToggleToSignIn(false);
+      setToggleToSignIn(false);
       setValue(null);
+
     }).catch(function (error) {
       message.error(error.message);
     });
@@ -92,7 +109,8 @@ export default function SignIn() {
 
 
 
-  if ((value == null) && (auth.currentUser == null)) {
+  //if ((value == null) && (auth.currentUser == null)) {
+  if ((value == null) && (auth.currentUser == null) && (!toggleToSignIn)) {
     console.log(`${isLoaded(auth)} and ${auth.currentUser}`);
     return (
       <nav className="header">
@@ -111,7 +129,7 @@ export default function SignIn() {
 
           </form>
         </Modal>
-        <h3> Please SignIn if you want to Post your comments</h3>
+        <h3> Please SignIn/SignUp if you want to Post your comments</h3>
         <Button type="primary" onClick={() => setSigninVisible(true)}> Sign In</Button>
         <Modal title="Sign in" visible={signinVisible} onOk={doSignIn} onCancel={() => setSigninVisible(false)}>
           <h1>Sign In</h1>
@@ -126,6 +144,8 @@ export default function SignIn() {
     return (
       <nav className="header">
         <Link to="/SocioLax">HOME</Link>
+        {/* <button onClick={() => doAddPost()}>Add Post</button> */}
+
         <Button onClick={doSignOut}>Sign out</Button>
       </nav>
     )

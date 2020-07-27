@@ -5,16 +5,19 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Landing from './home/Landing'
 import SignIn from "./SignIn"
 import TheController from './SocioLax/TheController';
-import { UserContext } from './userContext';
+import { UserContext, AddPostContext } from './userContext';
 
 
 function App() {
   const [value, setValue] = useState(null);
-  //const [list, setList] = useState([]);
+  // const [addPost, setAddPost] = useState(false);
 
   return (
     <Router>
-      <UserContext.Provider value={{ value, setValue }}>
+
+      <UserContext.Provider value={{ value, setValue }} >
+        {/* <AddPostContext.Provider value={{ addPost, setAddPost }}> */}
+        {/* <UserContext.Provider value={{ value, setValue }} > */}
         <SignIn />
         <Switch>
           <Route path="/SocioLax">
@@ -24,8 +27,10 @@ function App() {
             <Landing />
           </Route>
         </Switch>
+        {/* </AddPostContext.Provider> */}
       </UserContext.Provider>
-    </Router>
+
+    </Router >
   );
 }
 
