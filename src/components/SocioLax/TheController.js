@@ -63,13 +63,10 @@ export default function TheController() {
     console.log(value);
     //console.log(addPost);
    // if (addPost) {
-      currentlyVisibleState = <NewPostForm auth={auth} />
+      //currentlyVisibleState = <NewPostForm auth={auth} />
+      currentlyVisibleState =  <PostsList currentUser={auth.currentUser} />
     }
-    // } else if (MyPosts) {
-    // currentlyVisibleState = <NewKeg onNewKegCreation={this.onNewKegCreation} />
-    // } else if (seeAllPosts) {
-    // currentlyVisibleState = <KegList kegList={this.state.masterKegList} buy={this.buy} detail={this.detail} />;
-    // }
+    
     return (
       <React.Fragment>
         {currentlyVisibleState}

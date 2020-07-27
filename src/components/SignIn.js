@@ -4,7 +4,8 @@ import { message, Button, Modal } from 'antd';
 import { isLoaded } from 'react-redux-firebase'
 import { Link } from "react-router-dom";
 import { useFirestore } from 'react-redux-firebase';
-import { UserContext, AddPostContext } from './userContext';
+//import { UserContext, AddPostContext } from './userContext';
+import { UserContext } from './userContext';
 
 ///////////////////
 ///////////////////
@@ -86,7 +87,7 @@ export default function SignIn() {
   //   console.log(addPost)
   // }
 
-
+  //
 
 
   ////////////////////
@@ -98,6 +99,7 @@ export default function SignIn() {
       message.success("Successfully signed out!");
       setToggleToSignIn(false);
       setValue(null);
+      console.log (`Here is value ${value} and currentUser ${auth.currentUser} and togglething ${toggleToSignIn}`);
 
     }).catch(function (error) {
       message.error(error.message);
@@ -107,7 +109,7 @@ export default function SignIn() {
   ///////////////////
   ///////////////////
 
-
+  // newfuction() that has everything bolow in it
 
   //if ((value == null) && (auth.currentUser == null)) {
   if ((value == null) && (auth.currentUser == null) && (!toggleToSignIn)) {
@@ -145,6 +147,8 @@ export default function SignIn() {
       <nav className="header">
         <Link to="/SocioLax">HOME</Link>
         {/* <button onClick={() => doAddPost()}>Add Post</button> */}
+        <Link to="/">See all Posts</Link>
+        <Link to="/PostsList">See My Posts Only</Link>
 
         <Button onClick={doSignOut}>Sign out</Button>
       </nav>
