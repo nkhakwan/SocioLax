@@ -149,6 +149,7 @@ export default function SignIn() {
         {/* <button onClick={() => doAddPost()}>Add Post</button> */}
         <Link to="/">See all Posts</Link>
         <Link to="/PostsList">See My Posts Only</Link>
+        <Link to="/NewPostForm">Add a comment</Link>
 
         <Button onClick={doSignOut}>Sign out</Button>
       </nav>

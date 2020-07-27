@@ -1,9 +1,14 @@
-import React, { useState } from 'react'
-import { message } from "antd"
+import React, { useState, useEffect, useContext } from 'react'
+import { isLoaded } from 'react-redux-firebase';
+import firebase from 'firebase/app'
+import { message, Button, Modal } from 'antd';
+import { Link } from "react-router-dom";
 import { useFirestore } from 'react-redux-firebase'
 
 export default function NewPostForm(props) {
-  const { auth } = props
+  //const { auth } = props
+  const auth = firebase.auth();
+  console.log("i am in newForm");
 
   const firestore = useFirestore();
   const [name, setname] = useState('');
