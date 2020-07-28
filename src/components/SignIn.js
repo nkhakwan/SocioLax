@@ -51,10 +51,9 @@ export default function SignIn() {
         //console.log("do i get anything here=>>> ", data.user.uid)
 
         message.success("successfully signed up!");
-        setValue(auth.currentUser);
+        //setValue(auth.currentUser);
         setSignupVisible(false)
         setToggleToSignIn(true);
-        //setToggleToSignIn(true);
         return firestore.collection('users').add({ userId: data.user.uid, role, liked: [] })
       }).catch(function (error) {
         message.error(error.message);
@@ -73,7 +72,7 @@ export default function SignIn() {
       message.success("Successfully signed in!");
       setSigninVisible(false)
       setToggleToSignIn(true);
-      setValue(auth.currentUser);
+      //setValue(auth.currentUser);
       //console.log(value);
       console.log(auth.currentUser);
       //console.log(auth)
@@ -99,7 +98,7 @@ export default function SignIn() {
     firebase.auth().signOut().then(function () {
       message.success("Successfully signed out!");
       setToggleToSignIn(false);
-      setValue(null);
+     // setValue(null);
       console.log (`Here is value ${value} and currentUser ${auth.currentUser} and togglething ${toggleToSignIn}`);
 
     }).catch(function (error) {
@@ -112,9 +111,10 @@ export default function SignIn() {
 
   // newfuction() that has everything bolow in it
 
-  //if ((value == null) && (auth.currentUser == null)) {
     console.log(` here is the current user ${auth.currentUser} and value ${value} and toggle thing ${toggleToSignIn}`);
-  if ((value == null) && (auth.currentUser == null) && (!toggleToSignIn)) {
+  //if ((value == null) && (auth.currentUser == null) && (!toggleToSignIn)) {
+  if ((auth.currentUser == null) && (!toggleToSignIn)) {
+    console.log("i am in signin and signUP");
     //console.log(`${isLoaded(auth)} and ${auth.currentUser}`);
     return (
       <nav className="header">

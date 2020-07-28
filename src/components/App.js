@@ -12,7 +12,7 @@ import NewPostForm from './SocioLax/NewPostForm';
 
 
 function App() {
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState(false);
   // const [addPost, setAddPost] = useState(false);
 
   return (
