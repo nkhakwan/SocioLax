@@ -52,6 +52,7 @@ export default function PostNote(props) {
 if (!myEdit){
   return (
     //<div key={posting.userId} className='pc'>
+    
     <div  className='pc'>
       <h2>{posting.name}</h2>
       <h3>By {posting.userEmail}</h3>

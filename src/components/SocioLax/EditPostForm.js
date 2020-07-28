@@ -16,8 +16,9 @@ export default function EditPostForm(props) {
   const [desc, setdesc] = useState('');
 
   const upDatePosting = (id, userId, owner) => {
+    console.log (`owner is ${owner} post.id is ${id} and userId is ${userId}`);
     if (userId == owner){
-    message.success("Post Added Succesfully!")
+    message.success("Post updated Succesfully!")
     return firestore.update({ collection: 'postings', doc: id }, { desc: desc  , url:url, name: name})
     } else {
       console.log("you are not the owner of this post");
@@ -30,7 +31,7 @@ export default function EditPostForm(props) {
         <input onChange={e => setname(e.target.value)} type="text" placeholder=" Post Title" />
         <input onChange={e => seturl(e.target.value)} type="url" placeholder="Your Sign" />
         <textarea onChange={e => setdesc(e.target.value)} cols="50" rows="10" placeholder="describe your project and tech used" />
-        <button onClick={upDatePosting(docId, userId, owner)} >Update!</button>
+        <Button onClick={upDatePosting(docId, userId, owner)} >Update!</Button>
       </form>
     </div>
   )

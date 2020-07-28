@@ -75,7 +75,7 @@ export default function SignIn() {
       setToggleToSignIn(true);
       setValue(auth.currentUser);
       //console.log(value);
-      //console.log(auth.currentUser)
+      console.log(auth.currentUser);
       //console.log(auth)
     }).catch(function (error) {
       message.error(error.message);
@@ -100,7 +100,7 @@ export default function SignIn() {
       message.success("Successfully signed out!");
       setToggleToSignIn(false);
       setValue(null);
-      //console.log (`Here is value ${value} and currentUser ${auth.currentUser} and togglething ${toggleToSignIn}`);
+      console.log (`Here is value ${value} and currentUser ${auth.currentUser} and togglething ${toggleToSignIn}`);
 
     }).catch(function (error) {
       message.error(error.message);
@@ -113,6 +113,7 @@ export default function SignIn() {
   // newfuction() that has everything bolow in it
 
   //if ((value == null) && (auth.currentUser == null)) {
+    console.log(` here is the current user ${auth.currentUser} and value ${value} and toggle thing ${toggleToSignIn}`);
   if ((value == null) && (auth.currentUser == null) && (!toggleToSignIn)) {
     //console.log(`${isLoaded(auth)} and ${auth.currentUser}`);
     return (
@@ -156,6 +157,7 @@ export default function SignIn() {
       </nav>
     )
   }
+  console.log(auth.currentUser);
 }
 
 
