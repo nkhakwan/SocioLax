@@ -9,7 +9,7 @@ import { useFirestore } from 'react-redux-firebase'
 import { UserContext, AddPostContext } from '../userContext'
 
 export default function PostsList(props) {
-  console.log("i am in PostsList");
+  //console.log("i am in PostsList");
   const { currentUser } = props
   const firestore = useFirestore();
   const [data, setdata] = useState([])
@@ -30,12 +30,12 @@ export default function PostsList(props) {
         let temp = [...data];
         querySnapshot.forEach(function (doc) {
           temp = [...temp, { ...doc.data(), id: doc.id }];
-          console.log(doc.id, '==>', doc.data());
+         // console.log(doc.id, '==>', doc.data());
         });
         setdata(temp);
       })
       .catch(function (error) {
-        console.log("Error getting documents: ", error);
+       // console.log("Error getting documents: ", error);
       });
   }, [])
 

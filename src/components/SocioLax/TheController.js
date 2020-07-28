@@ -47,7 +47,7 @@ export default function TheController() {
   // ==================
   // ==================
   if ((value == null)) {
-    console.log(isLoaded(auth));
+    //console.log(isLoaded(auth));
 
     return (
       <React.Fragment>
@@ -60,7 +60,7 @@ export default function TheController() {
   //===================
   let currentlyVisibleState = null;
   if ((value)) {
-    console.log(value);
+   // console.log(value);
     //console.log(addPost);
    // if (addPost) {
       //currentlyVisibleState = <NewPostForm auth={auth} />

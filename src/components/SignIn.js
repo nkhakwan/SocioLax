@@ -39,7 +39,7 @@ export default function SignIn() {
 
   const firestore = useFirestore()
   const auth = firebase.auth()
-  console.log(`${isLoaded(auth)} and ${auth.currentUser}`);
+  //console.log(`${isLoaded(auth)} and ${auth.currentUser}`);
 
   //////////////////////
   //////////////////////
@@ -48,7 +48,7 @@ export default function SignIn() {
     console.log("i am in signup");
     if (signupPassword === signupConfirmPassword) {
       firebase.auth().createUserWithEmailAndPassword(signupEmail, signupPassword).then(function (data) {
-        console.log("do i get anything here=>>> ", data.user.uid)
+        //console.log("do i get anything here=>>> ", data.user.uid)
 
         message.success("successfully signed up!");
         setValue(auth.currentUser);
@@ -74,9 +74,9 @@ export default function SignIn() {
       setSigninVisible(false)
       setToggleToSignIn(true);
       setValue(auth.currentUser);
-      console.log(value);
-      console.log(auth.currentUser)
-      console.log(auth)
+      //console.log(value);
+      //console.log(auth.currentUser)
+      //console.log(auth)
     }).catch(function (error) {
       message.error(error.message);
     });
@@ -100,7 +100,7 @@ export default function SignIn() {
       message.success("Successfully signed out!");
       setToggleToSignIn(false);
       setValue(null);
-      console.log (`Here is value ${value} and currentUser ${auth.currentUser} and togglething ${toggleToSignIn}`);
+      //console.log (`Here is value ${value} and currentUser ${auth.currentUser} and togglething ${toggleToSignIn}`);
 
     }).catch(function (error) {
       message.error(error.message);
@@ -114,7 +114,7 @@ export default function SignIn() {
 
   //if ((value == null) && (auth.currentUser == null)) {
   if ((value == null) && (auth.currentUser == null) && (!toggleToSignIn)) {
-    console.log(`${isLoaded(auth)} and ${auth.currentUser}`);
+    //console.log(`${isLoaded(auth)} and ${auth.currentUser}`);
     return (
       <nav className="header">
         {/* <Link to="/">See All Posts</Link> */}
