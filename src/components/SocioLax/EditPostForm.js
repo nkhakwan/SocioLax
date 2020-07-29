@@ -50,7 +50,7 @@ export default function EditPostForm(props) {
       <form >
         <input onChange={e => setname(e.target.value)} type="text" placeholder=" Post Title" />
         <input onChange={e => seturl(e.target.value)} type="url" placeholder="Your Sign" />
-        <textarea onChange={e => setdesc(e.target.value)} cols="50" rows="10" placeholder="describe your project and tech used" />
+        <textarea onChange={e => setdesc(e.target.value)} cols="50" rows="10" placeholder="Put your new comments here" />
         {/* <Button onClick={upDatePosting(docId, userId, owner)} >Update!</Button> */}
          <Button onClick={upDatePosting} >Update!</Button> 
       </form>

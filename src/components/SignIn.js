@@ -4,7 +4,6 @@ import { message, Button, Modal } from 'antd';
 import { isLoaded } from 'react-redux-firebase'
 import { Link } from "react-router-dom";
 import { useFirestore } from 'react-redux-firebase';
-//import { UserContext, AddPostContext } from './userContext';
 import { UserContext } from './userContext';
 
 ///////////////////
@@ -152,11 +151,12 @@ export default function SignIn() {
   } else {
     return (
       <nav className="header">
-        <Link to="/SocioLax">HOME</Link>
+        {/* <Link to="/SocioLax">HOME</Link> */}
         {/* <button onClick={() => doAddPost()}>Add Post</button> */}
         <Link to="/">See all Posts</Link>
         <Link to="/PostsList">See My Posts Only</Link>
         <Link to="/NewPostForm">Add a comment</Link>
+        <Link to="/AllUsers">Show Me All Users</Link>
 
         <Button onClick={doSignOut}>Sign out</Button>
       </nav>

@@ -6,6 +6,7 @@ import Landing from './home/Landing'
 import SignIn from "./SignIn"
 import TheController from './SocioLax/TheController';
 import PostsList from './SocioLax/PostsList';
+import AllUsers from './SocioLax/AllUsers';
 // import { UserContext, AddPostContext } from './userConxt';
  import { UserContext } from './userContext';
 import NewPostForm from './SocioLax/NewPostForm';
@@ -34,6 +35,9 @@ function App() {
           </Route>
           <Route exact path="/NewPostForm">
             <NewPostForm />
+          </Route>
+          <Route exact path="/AllUsers">
+            <AllUsers />
           </Route>
         </Switch>
         {/* </AddPostContext.Provider> */}
