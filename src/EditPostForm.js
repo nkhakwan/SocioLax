@@ -22,16 +22,15 @@ export default function EditPostForm(props) {
   const { value, setValue } = useContext(UserContext);
 
   
-    function upDatePosting(event) {
+   /* function upDatePosting(event) {
       event.preventDefault();
-      console.log("after preventDefault");
       props.Edit(
         {
           name: name,
           desc: desc,
           url: url
         });
-    }
+    }*/
 
  /* const upDatePosting = (id, userId, owner) => {
     console.log (`owner is ${owner} post.id is ${id} and userId is ${userId}`);
@@ -52,7 +51,7 @@ export default function EditPostForm(props) {
         <input onChange={e => seturl(e.target.value)} type="url" placeholder="Your Sign" />
         <textarea onChange={e => setdesc(e.target.value)} cols="50" rows="10" placeholder="describe your project and tech used" />
         {/* <Button onClick={upDatePosting(docId, userId, owner)} >Update!</Button> */}
-         <Button onClick={upDatePosting} >Update!</Button> 
+         {/* <Button onSubmit={upDatePosting} >Update!</Button> */}
       </form>
     </div>
   )

@@ -11,6 +11,8 @@ import { UserContext } from './userContext';
 ///////////////////
 
 export default function SignIn() {
+  const firestore = useFirestore()
+  const auth = firebase.auth()
   console.log("i am in signin main");
 
 
@@ -37,8 +39,6 @@ export default function SignIn() {
   ///////////////////////
   ///////////////////////
 
-  const firestore = useFirestore()
-  const auth = firebase.auth()
   //console.log(`${isLoaded(auth)} and ${auth.currentUser}`);
 
   //////////////////////
@@ -52,6 +52,7 @@ export default function SignIn() {
 
         message.success("successfully signed up!");
         //setValue(auth.currentUser);
+        console.log("doSignUp auth user: ", auth.currentUser);
         setSignupVisible(false)
         setToggleToSignIn(true);
         return firestore.collection('users').add({ userId: data.user.uid, role, liked: [] })
@@ -68,17 +69,21 @@ export default function SignIn() {
 
   function doSignIn() {
     console.log("i am in simple signin");
-    firebase.auth().signInWithEmailAndPassword(signinEmail, signinPassword).then(function () {
-      message.success("Successfully signed in!");
-      setSigninVisible(false)
-      setToggleToSignIn(true);
-      //setValue(auth.currentUser);
-      //console.log(value);
-      console.log(auth.currentUser);
-      //console.log(auth)
-    }).catch(function (error) {
-      message.error(error.message);
-    });
+    if(!auth.currentUser){
+      firebase.auth().signInWithEmailAndPassword(signinEmail, signinPassword).then(function () {
+        message.success("Successfully signed in!");
+        setSigninVisible(false)
+        setToggleToSignIn(true);
+        //setValue(auth.currentUser);
+        //console.log(value);
+        console.log("doSignIn auth: ", auth.currentUser);
+        //console.log(auth)
+      }).catch(function (error) {
+        message.error(error.message);
+      });
+    } else {
+      console.log("ALREADY LOGGED IN");
+    }
   }
 
   // function doAddPost() {
@@ -98,8 +103,8 @@ export default function SignIn() {
     firebase.auth().signOut().then(function () {
       message.success("Successfully signed out!");
       setToggleToSignIn(false);
-     // setValue(null);
-      console.log (`Here is value ${value} and currentUser ${auth.currentUser} and togglething ${toggleToSignIn}`);
+      //setValue(false);
+      console.log (`DOSIGNOUT: Here is value ${value} and currentUser ${auth.currentUser} and togglething ${toggleToSignIn}`);
 
     }).catch(function (error) {
       message.error(error.message);

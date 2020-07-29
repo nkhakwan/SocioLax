@@ -4,7 +4,6 @@ import { useFirestore } from 'react-redux-firebase';
 import EditPostForm from './EditPostForm'
 import { UserContext } from '../userContext';
 import { Link, Redirect } from "react-router-dom";
-import { message, Button, Modal } from 'antd';
 
 
 
@@ -51,30 +50,25 @@ export default function PostNote(props) {
 
     }
   }
-
-
- 
 //////////
 /////////
-  const Edit = (myData) => {
-  console.log (`owner is ${posting.userId} post.id is ${posting.id} and userId is ${user.uid}`);
+  /*const Edit = (myData) => {
+  console.log (`owner is ${owner} post.id is ${id} and userId is ${userId}`);
   //setValue(false);
-  if (posting.userId == user.uid){
+  if (userId == owner){
   message.success("Post updated Succesfully!")
-  setDRedirect(true);
-  setMyEdit(false);
-  return firestore.update({ collection: 'postings', doc: posting.id }, { desc: myData.desc  , url: myData.url, name: myData.name})
+  return firestore.update({ collection: 'postings', doc: posting.id }, { desc: desc  , url:url, name: name})
   } else {
     console.log("you are not the owner of this post");
   }
   setMyEdit(false);
-}
+}*/
 //////
 //////
 
 
 if (!myEdit){
-  //console.log("i am in value false");
+  console.log("i am in value false");
   console.log(user);
   return (
     <React.Fragment>
@@ -86,12 +80,11 @@ if (!myEdit){
       <h3>By {posting.userEmail}</h3>
       <p>{posting.desc}</p>
       <h4>Likes: {posting.likes}</h4>
-      {console.log(" in the first edit button inside postnote")}
       {user != null ? <button onClick={() => like(posting.id, user.uid)}>Like</button> : ''}
-      {user == null ? '' : user.uid == posting.userId ? <button onClick={() => deletePost(posting.id, user.uid)}>Delete</button> : ''} 
-      {/* {user == null ? '' : user.uid == posting.userId ? <button onClick={() => EditPost()}>Edit</button> : ''}  */}
-      {/* {user == null ? '' :user.uid == posting.userId ?<button onClick={() =><EditPostForm Edit={Edit} />}>Edit</button>: ''} */}
-      {user == null ? '' :user.uid == posting.userId ?<button onClick={()=>(setMyEdit(true))}>Edit</button>: ''}
+      {/* {user != null ? <button onClick={() => deletePost(posting.id, user.uid)}>You can delete only your post here</button> : ''} */}
+      {/* {user != null ? <button onClick={() => setMyEdit(true)}>You can edit only your own post here</button> : ''} */}
+       {user == null ? '' : user.uid == posting.userId ? <button onClick={() => deletePost(posting.id, user.uid)}>Delete</button> : ''} 
+       {user == null ? '' :user.uid == posting.userId ?<button onClick={() => setMyEdit(true)}>Edit</button> : ''}
       <a href={posting.url}>See it</a>
     </div>
 }
@@ -99,8 +92,9 @@ if (!myEdit){
   )
 } else if(myEdit){
   console.log("I am in value ture");
+  //setMyEdit(false);
    return(
-    <EditPostForm Edit={Edit}/>
+    <EditPostForm EditdocId={posting.id} userId={user.uid} owner={posting.userId}/>
    )
    
 }
