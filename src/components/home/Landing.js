@@ -15,8 +15,6 @@ export default function Landing() {
   useFirestoreConnect([{ collection: 'postings' }])
   const postings = useSelector(state => state.firestore.ordered.postings)
   if (isLoaded(postings)) {
-    console.log(postings);
-    //postings.map(posting=> (console.log(posting.id)));
     return (
       <>
           <h1>All Postings</h1>

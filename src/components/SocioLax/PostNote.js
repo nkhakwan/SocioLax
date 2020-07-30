@@ -15,12 +15,9 @@ export default function PostNote(props) {
   const firestore = useFirestore();
   const [user, setUser] = useState(null);
   const [dRedirect, setDRedirect] = useState(false);
-  ////
   const [myEdit, setMyEdit] = useState(false);
   const { value, setValue } = useContext(UserContext);
-  ////
   const auth = firebase.auth()
-  console.log("i am in postnote");
 
   useEffect(() => {
     setUser(auth.currentUser)
@@ -50,14 +47,12 @@ export default function PostNote(props) {
  
 
   const Edit = (myData) => {
-  console.log (`owner is ${posting.userId} post.id is ${posting.id} and userId is ${user.uid}`);
   if (posting.userId == user.uid){
   message.success("Post updated Succesfully!")
   setDRedirect(true);
   setMyEdit(false);
   return firestore.update({ collection: 'postings', doc: posting.id }, { desc: myData.desc  , url: myData.url, name: myData.name})
   } else {
-    console.log("you are not the owner of this post");
   }
   setMyEdit(false);
 }
@@ -65,7 +60,6 @@ export default function PostNote(props) {
 
 
 if (!myEdit){
-  console.log(user);
   return (
     <React.Fragment>
     {dRedirect ?<Redirect to="/" /> : 
@@ -84,7 +78,6 @@ if (!myEdit){
           {user != null ? <button onClick={() => like(posting.id, user.uid)}>Like</button> : ''}
           {user == null ? '' : user.uid == posting.userId ? <button onClick={() => deletePost(posting.id, user.uid)}>Delete</button> : ''} 
           {user == null ? '' :user.uid == posting.userId ?<button onClick={()=>(setMyEdit(true))}>Edit</button>: ''}
-          {/* <a href={posting.url}>See it</a> */}
         </div>
       </div>
     </div>
@@ -92,7 +85,6 @@ if (!myEdit){
 </React.Fragment>
   )
 } else if(myEdit){
-  console.log("I am in value ture");
    return(
     <EditPostForm Edit={Edit}/>
    )

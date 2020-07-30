@@ -18,12 +18,10 @@ export default function NewPostForm(props) {
   const [redirect, setRedirect] = useState(false);
 
   const addProject = () => {
-   // addPost(false)
     message.success("Post Added Succesfully!")
     setRedirect(true);
     return firestore.collection('postings').add({ name, url, desc, userId: auth.currentUser.uid, userEmail: auth.currentUser.email, likes: 0, usersLiked: [] })
   }
- // Link to="/">See all Posts</Link>
 
   return (
     <React.Fragment>

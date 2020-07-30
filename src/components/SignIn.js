@@ -29,28 +29,15 @@ export default function SignIn() {
   //======================
   const { value, setValue } = useContext(UserContext);
   //const { addPost, setAddPost } = useContext(AddPostContext);
-  // ==============================
-
-  //////////////////////////////
-  /////////////////////////////
-  //const [toggleToSignIn, setToggleToSignIn] = useState(false);
-
-  ///////////////////////
-  ///////////////////////
-
-  //console.log(`${isLoaded(auth)} and ${auth.currentUser}`);
-
-  //////////////////////
-  //////////////////////
+  
 
   function doSignUp() {
     console.log("i am in signup");
     if (signupPassword === signupConfirmPassword) {
       firebase.auth().createUserWithEmailAndPassword(signupEmail, signupPassword).then(function (data) {
-        //console.log("do i get anything here=>>> ", data.user.uid)
+        console.log("do i get anything here=>>> ", data.user.uid)
 
         message.success("successfully signed up!");
-        //setValue(auth.currentUser);
         console.log("doSignUp auth user: ", auth.currentUser);
         setSignupVisible(false)
         setToggleToSignIn(true);
@@ -73,10 +60,9 @@ export default function SignIn() {
         message.success("Successfully signed in!");
         setSigninVisible(false)
         setToggleToSignIn(true);
-        //setValue(auth.currentUser);
-        //console.log(value);
+        console.log(value);
         console.log("doSignIn auth: ", auth.currentUser);
-        //console.log(auth)
+        console.log(auth)
       }).catch(function (error) {
         message.error(error.message);
       });
@@ -85,14 +71,7 @@ export default function SignIn() {
     }
   }
 
-  // function doAddPost() {
-  //   console.log(addPost)
-  //   setAddPost(true);
-  //   console.log(addPost)
-  // }
-
-  //
-
+  
 
   ////////////////////
   ///////////////////
@@ -102,7 +81,6 @@ export default function SignIn() {
     firebase.auth().signOut().then(function () {
       message.success("Successfully signed out!");
       setToggleToSignIn(false);
-      //setValue(false);
       console.log (`DOSIGNOUT: Here is value ${value} and currentUser ${auth.currentUser} and togglething ${toggleToSignIn}`);
 
     }).catch(function (error) {
@@ -113,16 +91,13 @@ export default function SignIn() {
   ///////////////////
   ///////////////////
 
-  // newfuction() that has everything bolow in it
 
     console.log(` here is the current user ${auth.currentUser} and value ${value} and toggle thing ${toggleToSignIn}`);
-  //if ((value == null) && (auth.currentUser == null) && (!toggleToSignIn)) {
   if ((auth.currentUser == null) && (!toggleToSignIn)) {
     console.log("i am in signin and signUP");
     //console.log(`${isLoaded(auth)} and ${auth.currentUser}`);
     return (
       <nav className="header">
-        {/* <Link to="/">See All Posts</Link> */}
         <Button type="primary" onClick={() => setSignupVisible(true)}> Sign Up</Button>
         <Modal title="Sign up" visible={signupVisible} onOk={doSignUp} onCancel={() => setSignupVisible(false)}>
           <h1>Sign up</h1>
@@ -151,13 +126,10 @@ export default function SignIn() {
   } else {
     return (
       <nav className="header">
-        {/* <Link to="/SocioLax">HOME</Link> */}
-        {/* <button onClick={() => doAddPost()}>Add Post</button> */}
         <Link to="/">See all Posts</Link>
         <Link to="/PostsList">See My Posts Only</Link>
         <Link to="/NewPostForm">Add a comment</Link>
         <Link to="/AllUsers">Show Me All Users</Link>
-
         <Button onClick={doSignOut}>Sign out</Button>
       </nav>
     )

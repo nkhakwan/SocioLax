@@ -15,7 +15,7 @@ export default function AllUsers() {
   const firestore = useFirestore();
   const auth = firebase.auth();
   const [data, setData] = useState([]);  // new line
-  const [specificUser, setSpecificUser] = useState(false);  // new line
+  const [specificUser, setSpecificUser] = useState(false);
  // const { value, setValue } = useContext(UserContext);
 
 
@@ -23,12 +23,8 @@ export default function AllUsers() {
   const gettingUsers = useSelector(state => state.firestore.ordered.postings)
 
 
-  /////
-    ////
     const seeThisUserPosts = (email) => {
       setSpecificUser(true);
-      console.log(gettingUsers);
-      console.log("I am inside see this user post");
       firestore.collection("postings").where("userEmail", "==", email).get()
         .then(function (querySnapshot) {
           let temp = [...data];
@@ -41,11 +37,6 @@ export default function AllUsers() {
         });
   
       }
-      ////
-      ////
-
-
-  //if (isLoaded(gettingUsers) && !specificUser) {
   if (isLoaded(gettingUsers) && !specificUser) {
     let tempEmail =[];
     let uniqueTempEmail = [];
@@ -67,9 +58,6 @@ export default function AllUsers() {
       </>
     )
   } else if (specificUser){
-    //setSpecificUser(false);
-    console.log("i am inside specificUser ture");
-    console.log(data);
     return (
       <div className="postings-container">
         {data.length === 0 ? <h1>Nothing yet, add some!</h1> : data.map(post => <PostNote posting={post} />)}
