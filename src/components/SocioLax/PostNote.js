@@ -5,6 +5,7 @@ import EditPostForm from './EditPostForm'
 import { UserContext } from '../userContext';
 import { Link, Redirect } from "react-router-dom";
 import { message, Button, Modal } from 'antd';
+  
 
 
 
@@ -69,16 +70,23 @@ if (!myEdit){
     <React.Fragment>
     {dRedirect ?<Redirect to="/" /> : 
     
-    <div  className='pc'>
-      <h2>{posting.name}</h2>
-      <h3>By {posting.userEmail}</h3>
-      <p>{posting.desc}</p>
-      <h4>Likes: {posting.likes}</h4>
-      {console.log(" in the first edit button inside postnote")}
-      {user != null ? <button onClick={() => like(posting.id, user.uid)}>Like</button> : ''}
-      {user == null ? '' : user.uid == posting.userId ? <button onClick={() => deletePost(posting.id, user.uid)}>Delete</button> : ''} 
-      {user == null ? '' :user.uid == posting.userId ?<button onClick={()=>(setMyEdit(true))}>Edit</button>: ''}
-      <a href={posting.url}>See it</a>
+    <div  className='postings'>
+      <div className='row'>
+        <div className='column'>
+          <img className='imageWrap' src={posting.url} alternate="My Portfolio Picture Shows me Laughing"></img>
+        </div>
+        <div className='column'>
+          <h2>{posting.name}</h2>
+          <h3>By {posting.userEmail}</h3>
+          <p>{posting.desc}</p>
+          <h4>Likes: {posting.likes}</h4>
+          {console.log(" in the first edit button inside postnote")}
+          {user != null ? <button onClick={() => like(posting.id, user.uid)}>Like</button> : ''}
+          {user == null ? '' : user.uid == posting.userId ? <button onClick={() => deletePost(posting.id, user.uid)}>Delete</button> : ''} 
+          {user == null ? '' :user.uid == posting.userId ?<button onClick={()=>(setMyEdit(true))}>Edit</button>: ''}
+          {/* <a href={posting.url}>See it</a> */}
+        </div>
+      </div>
     </div>
 }
 </React.Fragment>

@@ -7,14 +7,12 @@ import SignIn from "./SignIn"
 import TheController from './SocioLax/TheController';
 import PostsList from './SocioLax/PostsList';
 import AllUsers from './SocioLax/AllUsers';
-// import { UserContext, AddPostContext } from './userConxt';
- import { UserContext } from './userContext';
+import { UserContext } from './userContext';
 import NewPostForm from './SocioLax/NewPostForm';
 
 
 function App() {
   const [value, setValue] = useState(false);
-  // const [addPost, setAddPost] = useState(false);
 
   return (
     <Router>

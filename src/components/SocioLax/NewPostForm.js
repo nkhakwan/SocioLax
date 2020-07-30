@@ -28,11 +28,11 @@ export default function NewPostForm(props) {
   return (
     <React.Fragment>
     {redirect ?<Redirect to="/" /> : 
-    <div>
+    <div class = "new-form">
       <form >
-        <input onChange={e => setname(e.target.value)} type="text" placeholder=" Post Title" />
-        <input onChange={e => seturl(e.target.value)} type="url" placeholder="URL" />
-        <textarea onChange={e => setdesc(e.target.value)} cols="50" rows="10" placeholder="Add your comments" />
+        <input class="nf-inputs" onChange={e => setname(e.target.value)} type="text" placeholder=" Post Title" />
+        <input class="nf-inputs" onChange={e => seturl(e.target.value)} type="url" placeholder="add link to your image" />
+        <textarea class="nf-inputs" onChange={e => setdesc(e.target.value)} cols="50" rows="10" placeholder="Add your comments" />
         <button onClick={addProject} >Post!</button>
       </form>
     </div>}

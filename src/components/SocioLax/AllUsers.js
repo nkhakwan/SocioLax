@@ -1,10 +1,12 @@
 import { useFirestoreConnect, isLoaded } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
 import PostNote from "../SocioLax/PostNote";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import firebase from "firebase/app";
 import { Link } from "react-router-dom";
 import { useFirestore } from 'react-redux-firebase';
+//import { UserContext } from '../userContext'
+
 
 
 
@@ -14,6 +16,7 @@ export default function AllUsers() {
   const auth = firebase.auth();
   const [data, setData] = useState([]);  // new line
   const [specificUser, setSpecificUser] = useState(false);  // new line
+ // const { value, setValue } = useContext(UserContext);
 
 
   useFirestoreConnect([{ collection: 'postings' }])
@@ -42,6 +45,7 @@ export default function AllUsers() {
       ////
 
 
+  //if (isLoaded(gettingUsers) && !specificUser) {
   if (isLoaded(gettingUsers) && !specificUser) {
     let tempEmail =[];
     let uniqueTempEmail = [];
@@ -67,7 +71,7 @@ export default function AllUsers() {
     console.log("i am inside specificUser ture");
     console.log(data);
     return (
-      <div className="card-container">
+      <div className="postings-container">
         {data.length === 0 ? <h1>Nothing yet, add some!</h1> : data.map(post => <PostNote posting={post} />)}
       </div>
     )

@@ -6,7 +6,7 @@ import NewPostForm from './NewPostForm';
 import { message, Button, Modal } from 'antd';
 import { Link } from "react-router-dom";
 import { useFirestore } from 'react-redux-firebase'
-import { UserContext, AddPostContext } from '../userContext'
+
 
 
 export default function TheController() {
@@ -18,7 +18,9 @@ export default function TheController() {
   // [seeAllPosts, setSeeAllPosts] = useState(false);
   //======================
   //======================  
-  const { value, setValue } = useContext(UserContext);
+ // import { UserContext } from '../userContext'
+  //const { value, setValue } = useContext(UserContext);
+
  // const { addPost, setAddPost } = useContext(AddPostContext);
   //==========================
   //==========================
@@ -46,26 +48,26 @@ export default function TheController() {
 
   // ==================
   // ==================
-  if ((value == null)) {
-    //console.log(isLoaded(auth));
+  // if ((value == null)) {
+  //   //console.log(isLoaded(auth));
 
-    return (
-      <React.Fragment>
-        <h1>You must be signed in to see your profile</h1>
-      </React.Fragment>
-    )
-  }
+  //   return (
+  //     <React.Fragment>
+  //       <h1>You must be signed in to see your profile</h1>
+  //     </React.Fragment>
+  //   )
+  // }
 
   //===================
   //===================
   let currentlyVisibleState = null;
-  if ((value)) {
-   // console.log(value);
-    //console.log(addPost);
-   // if (addPost) {
-      //currentlyVisibleState = <NewPostForm auth={auth} />
-      currentlyVisibleState =  <PostsList currentUser={auth.currentUser} />
-    }
+  // if ((value)) {
+  //  // console.log(value);
+  //   //console.log(addPost);
+  //  // if (addPost) {
+  //     //currentlyVisibleState = <NewPostForm auth={auth} />
+  //     currentlyVisibleState =  <PostsList currentUser={auth.currentUser} />
+  //   }
     
     return (
       <React.Fragment>

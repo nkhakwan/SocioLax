@@ -20,7 +20,7 @@ export default function Landing() {
     return (
       <>
           <h1>All Postings</h1>
-        <div className="card-container">
+        <div className="postings-container">
           {postings.length === 0 ? <h1>Nothing yet, post what's on your mind!</h1> : postings.map(posting => (<PostNote key={posting.id} posting={posting} />))}
         </div>
       </>

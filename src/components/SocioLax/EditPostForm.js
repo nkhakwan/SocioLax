@@ -46,13 +46,13 @@ export default function EditPostForm(props) {
   }*/
 
  return (
-    <div>
+    <div class="new-form">
       <form >
-        <input onChange={e => setname(e.target.value)} type="text" placeholder=" Post Title" />
-        <input onChange={e => seturl(e.target.value)} type="url" placeholder="Your Sign" />
-        <textarea onChange={e => setdesc(e.target.value)} cols="50" rows="10" placeholder="Put your new comments here" />
+        <input class="nf-inputs" onChange={e => setname(e.target.value)} type="text" placeholder=" Post Title" />
+        <input class="nf-inputs" onChange={e => seturl(e.target.value)} type="url" placeholder="Your pic link in jpg" />
+        <textarea class="nf-inputs" onChange={e => setdesc(e.target.value)} cols="50" rows="10" placeholder="Put your new comments here" />
         {/* <Button onClick={upDatePosting(docId, userId, owner)} >Update!</Button> */}
-         <Button onClick={upDatePosting} >Update!</Button> 
+         <button onClick={upDatePosting} >Update!</button> 
       </form>
     </div>
   )
