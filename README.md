@@ -7,12 +7,21 @@
 ## Description
 
 _This React Project is named "SocioLax" because it is intended to be a chillaxing website for socializing by a group. This website supports signUp and signIn thru Firebase. All the posts by users are stored in Fire store NoSql google database. Initial Screen brings up all the posts on the page. However viewer can only see the posts and cannot perform any operations. He/she has to either signIn or SignUp. After that he/she can
-a- Add comments,
-b- Edit/delete his own comments only
-c- Can "like" his or anybody else's coments
-d- He/she can view a page that contains only his comments
-e- Or view page that has all the user's listed.
-f- And he/she can view a page that lists all comments of any particular user_
+
+* Add comments,
+* Edit/delete his own comments only
+* Can "like" his or anybody else's coments
+* He/she can view a page that contains only his comments
+* Or view page that has all the user's listed.
+* And he/she can view a page that lists all comments of any particular user_
+
+## Lessons Learned
+
+1. Firebase/Firestore was used for both Authentication and database and since Firestore needs redux so redux was implemented in the project. But redux was not used for using states accross components. Only local states with react "useState" were used. This at times produced problems as states accross components could not be shared and I didn't know how to use userContext for this purpose. And didn't have time for literature study for that. There it was a regret not to have redux "Actions" and "Reducers" in the project. So bottom line is either to have mastery on userContext or one must use redux Actions and Reducers for sharing states accross components.
+
+2. Using "redirect" and "Link" makes life abundantly easier.  After every delete or Edit action or other actions, the page should be redirected to screen you want; otherwise things are getting updated and the viewer has to click some button to get away from the screen action was done.
+
+3. useEffects, useStates and if one knows how to use useContext are tools that life immensely easy.
 
 
 ## Setup/Installation Requirements
