@@ -41,7 +41,8 @@ https://z7f7y8d6.stackpathcdn.com/wp-content/uploads/2018/05/Gibraltar-rock-1024
 
 ## Known Bugs
 
-When the posts of any particular user is viewed, everything works except "all user page" do not respond. To circumven this all you have to do is to click any other page first and you can view "all users" page again. Issue at core has been identified but the solution requires correct usage of 'userContext' hook.
+* When the posts of any particular user is viewed, everything works except "all user page" do not respond. To circumven this all you have to do is to click any other page first and you can view "all users" page again. Issue at core has been identified but the solution requires correct usage of 'userContext' hook.
+* I have on purpose left few console.logs and few commented out lines in the code. Those are needed to fix the bug.
  
 ## Support and contact details
 
